@@ -1,42 +1,37 @@
 'use strict';
 
-window.renderStatistics = function (ctx, names, times) {
-  var drawBackground = function () {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-    ctx.strokeRect(110, 20, 420, 270);
-    ctx.fillRect(110, 20, 420, 270);
+var drawBackground = function (ctx) {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  ctx.strokeRect(110, 20, 420, 270);
+  ctx.fillRect(110, 20, 420, 270);
 
-    ctx.fillStyle = 'white';
-    ctx.strokeRect(100, 10, 420, 270);
-    ctx.fillRect(100, 10, 420, 270);
-  };
+  ctx.fillStyle = 'white';
+  ctx.strokeRect(100, 10, 420, 270);
+  ctx.fillRect(100, 10, 420, 270);
+};
 
-  drawBackground();
+var writeText = function (ctx) {
+  ctx.fillStyle = '#000';
+  ctx.font = '16px PT Mono';
 
-  var writeText = function () {
-    ctx.fillStyle = '#000';
-    ctx.font = '16px PT Mono';
+  ctx.fillText('Ура, вы победили!', 120, 40);
+  ctx.fillText('Список результатов:', 120, 60);
+};
 
-    ctx.fillText('Ура, вы победили!', 120, 40);
-    ctx.fillText('Список результатов:', 120, 60);
-  };
+var getMaxTime = function (times) {
+  var max = -1;
 
-  writeText();
-
-  var getMaxTime = function () {
-    var max = -1;
-
-    for (var i = 0; i < times.length; i++) {
-      var time = times[i];
-      if (time > max) {
-        max = time;
-      }
+  for (var i = 0; i < times.length; i++) {
+    var time = times[i];
+    if (time > max) {
+      max = time;
     }
-    return max;
-  };
+  }
+  return max;
+};
 
-  var max = getMaxTime();
-
+var drawStatisticsItems = function (ctx, names, times) {
+  var max = getMaxTime(times);
   var histogramHeight = 150;
   var step = histogramHeight / (max - 0);
   var indent = 50;
@@ -59,4 +54,10 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText(names[j], initialX, initialY + histogramHeight + lineHeight);
     ctx.fillText(Math.floor(times[j]), initialX, (initialY + (histogramHeight - times[j] * step)) - lineHeight);
   }
+};
+
+window.renderStatistics = function (ctx, names, times) {
+  drawBackground(ctx);
+  writeText(ctx);
+  drawStatisticsItems(ctx, names, times);
 };
