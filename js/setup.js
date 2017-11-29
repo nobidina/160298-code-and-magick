@@ -10,11 +10,9 @@ var showUserDialog = function () {
   userDialog.classList.remove('hidden');
 };
 
-
 var getRandom = function (range) {
   return Math.floor(Math.random() * range);
 };
-
 
 var getWizardslist = function () {
   var wizards = [];
@@ -33,9 +31,7 @@ var getWizardslist = function () {
   return wizards;
 };
 
-
 var renderWizard = function (wizard) {
-
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
@@ -45,7 +41,6 @@ var renderWizard = function (wizard) {
 
   return wizardElement;
 };
-
 
 var renderWizards = function () {
   var similarListElement = userDialog.querySelector('.setup-similar-list');
@@ -58,12 +53,14 @@ var renderWizards = function () {
   similarListElement.appendChild(fragment);
 };
 
-
 var showWisardsList = function () {
   userDialog.querySelector('.setup-similar').classList.remove('hidden');
 };
 
+var showWizardOptions = function () {
+  renderWizards();
+  showUserDialog();
+  showWisardsList();
+};
 
-renderWizards();
-showUserDialog();
-showWisardsList();
+showWizardOptions();
