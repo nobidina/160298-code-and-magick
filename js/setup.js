@@ -5,13 +5,9 @@ var LAST_NAME_LIST = ['да Марья', 'Верон', 'Мирабелла', 'В
 var COAT_COLOR_LIST = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_COLOR_LIST = ['black', 'red', 'blue', 'yellow', 'green'];
 var FIREBALL_COLOR_LIST = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+var BTN_ESC = 27;
+var BTN_ENTER = 13;
 var userDialog = document.querySelector('.setup');
-var btnEsc = 27;
-var btnEnter = 13;
-
-// var showUserDialog = function () {
-//   userDialog.classList.remove('hidden');
-// };
 
 var getRandom = function (range) {
   return Math.floor(Math.random() * range);
@@ -60,14 +56,6 @@ var showWisardsList = function () {
   userDialog.querySelector('.setup-similar').classList.remove('hidden');
 };
 
-var showWizardOptions = function () {
-  renderWizards();
-  showWisardsList();
-  // showUserDialog();
-};
-
-showWizardOptions();
-
 // смена цветов по клику
 
 var changeMainWizardСolors = function () {
@@ -86,62 +74,66 @@ var changeMainWizardСolors = function () {
   });
 };
 
-changeMainWizardСolors();
-
 // открытие и закрытие окна редактирования волшебника
-
-var onPopupEscPress = function (evt) {
-  var setupUserName = document.querySelector('.setup-user-name');
-
-  if (evt.keyCode === btnEsc && setupUserName !== document.activeElement) {
-    closePopup();
-  }
-};
-
-var openPopup = function () {
-  userDialog.classList.remove('hidden');
-  document.addEventListener('keydown', onPopupEscPress);
-};
-
-var closePopup = function () {
-  userDialog.classList.add('hidden');
-  document.removeEventListener('keydown', onPopupEscPress);
-};
 
 var closeOpenSetup = function () {
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = document.querySelector('.setup-close');
   var setupSubmit = document.querySelector('.setup-submit');
+  var setupUserName = document.querySelector('.setup-user-name');
 
-  setupOpen.addEventListener('click', function () {
-    openPopup();
-  });
+  var onSetupEscPress = function (evt) {
+    if (evt.keyCode === BTN_ESC && setupUserName !== document.activeElement) {
+      closePopup();
+    }
+  };
 
-  setupClose.addEventListener('click', function () {
+  var onSetupCloseEnterPress = function (evt) {
+    if (evt.keyCode === BTN_ENTER) {
+      closePopup();
+    }
+  };
+
+  var onSetupCloseClick = function () {
     closePopup();
-  });
+  };
 
-  setupOpen.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === btnEnter) {
+  var onSetupeOpenEnterPress = function (evt) {
+    if (evt.keyCode === BTN_ENTER) {
       openPopup();
     }
-  });
+  };
 
-  setupClose.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === btnEnter) {
-      closePopup();
-    }
-  });
+  var openPopup = function () {
+    userDialog.classList.remove('hidden');
 
-  setupSubmit.addEventListener('click', function () {
-    closePopup();
-  });
+    setupClose.addEventListener('click', onSetupCloseClick);
+    setupSubmit.addEventListener('click', onSetupCloseClick);
+    document.addEventListener('keydown', onSetupEscPress);
+    setupClose.addEventListener('keydown', onSetupCloseEnterPress);
+    setupSubmit.addEventListener('keydown', onSetupCloseEnterPress);
+  };
 
-  setupSubmit.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === btnEnter) {
-      closePopup();
-    }
-  });
+  var closePopup = function () {
+    userDialog.classList.add('hidden');
+
+    setupClose.removeEventListener('click', onSetupCloseClick);
+    setupSubmit.removeEventListener('click', onSetupCloseClick);
+    document.removeEventListener('keydown', onSetupEscPress);
+    setupClose.removeEventListener('keydown', onSetupCloseEnterPress);
+    setupSubmit.removeEventListener('keydown', onSetupCloseEnterPress);
+  };
+
+  setupOpen.addEventListener('click', openPopup);
+  setupOpen.addEventListener('keydown', onSetupeOpenEnterPress);
+
 };
 
-closeOpenSetup();
+var showWizardOptions = function () {
+  renderWizards();
+  showWisardsList();
+  closeOpenSetup();
+  changeMainWizardСolors();
+};
+
+showWizardOptions();
