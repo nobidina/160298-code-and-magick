@@ -3,8 +3,8 @@
 (function () {
   var BTN_ESC = 27;
   var BTN_ENTER = 13;
-  var userDialogStyleTop = '80px';
-  var userDialogStyleLeft = '50%';
+  var USER_DIALOG_STYLE_TOP = '80px';
+  var USER_DIALOG_STYLE_LEFT = '50%';
 
   // открытие и закрытие окна редактирования волшебника
   window.installСloseOpenSetup = function (userDialog) {
@@ -104,7 +104,7 @@
 
   // возвращаем окну начальные координаты
   var returnSetupStartPosition = function (userDialog) {
-    userDialog.style.top = userDialogStyleTop;
-    userDialog.style.left = userDialogStyleLeft;
+    userDialog.style.top = USER_DIALOG_STYLE_TOP;
+    userDialog.style.left = USER_DIALOG_STYLE_LEFT;
   };
 })();

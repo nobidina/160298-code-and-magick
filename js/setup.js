@@ -16,7 +16,7 @@ var getRandom = function (range) {
   var artifactsElement = document.querySelector('.setup-artifacts');
 
   shopElement.addEventListener('dragstart', function (evt) {
-    if (evt.target.tagName.toLowerCase() === 'img') {
+    if (evt.target.tagName === 'IMG') {
       draggedItem = evt.target;
       evt.dataTransfer.setData('text/plain', evt.target.alt);
     }
