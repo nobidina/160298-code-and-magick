@@ -1,7 +1,6 @@
 'use strict';
 
 // смена цветов частей волшебника по клику
-
 (function () {
   var FIREBALL_COLOR_LIST = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 

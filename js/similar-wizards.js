@@ -4,7 +4,6 @@
 
 (function () {
   // получаем список волшебников
-
   var getWizardslist = function (NAME_LIST, LAST_NAME_LIST, COAT_COLOR_LIST, EYES_COLOR_LIST, getRandom) {
     var wizards = [];
 
@@ -23,7 +22,6 @@
   };
 
   // создаем разметку для волшебника
-
   var renderWizard = function (wizard) {
     var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
     var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -36,7 +34,6 @@
   };
 
   // добавляем волшебников в родительский блок
-
   var renderWizards = function (userDialog, NAME_LIST, LAST_NAME_LIST, COAT_COLOR_LIST, EYES_COLOR_LIST, getRandom) {
     var similarListElement = userDialog.querySelector('.setup-similar-list');
     var fragment = document.createDocumentFragment();
@@ -49,7 +46,6 @@
   };
 
   // показываем блок с волшебниками
-
   window.showWisardsList = function (userDialog, NAME_LIST, LAST_NAME_LIST, COAT_COLOR_LIST, EYES_COLOR_LIST, getRandom) {
     renderWizards(userDialog, NAME_LIST, LAST_NAME_LIST, COAT_COLOR_LIST, EYES_COLOR_LIST, getRandom);
     userDialog.querySelector('.setup-similar').classList.remove('hidden');
