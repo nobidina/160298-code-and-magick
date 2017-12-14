@@ -59,21 +59,29 @@ var userDialog = document.querySelector('.setup');
 // смена цветов частей волшебника по клику
 (function () {
   window.changeMainWizardСolors = function () {
-    var mainWizardCoatColor = document.querySelector('.setup-wizard .wizard-coat');
-    var mainWizardEyesColor = document.querySelector('.setup-wizard .wizard-eyes');
-    var fireballColor = document.querySelector('.setup-fireball-wrap');
+    var mainWizardCoat = document.querySelector('.setup-wizard .wizard-coat');
+    var mainWizardEyes = document.querySelector('.setup-wizard .wizard-eyes');
+    var fireball = document.querySelector('.setup-fireball-wrap');
+    window.mainWizardCoatColor = '';
+    window.mainWizardEyesColor = '';
 
-    var fillElement = function (element, color) {
+    var fillWizardCoat = function (element, color) {
       element.style.fill = color;
+      window.changeCoatColorHandler(color);
     };
 
-    var changeElementBackground = function (element, color) {
+    var fillWizardEyes = function (element, color) {
+      element.style.fill = color;
+      window.changeEyesColorHandler(color);
+    };
+
+    var changeFireballBackground = function (element, color) {
       element.style.backgroundColor = color;
     };
 
-    window.colorizeElement(mainWizardCoatColor, COAT_COLOR_LIST, fillElement);
-    window.colorizeElement(mainWizardEyesColor, EYES_COLOR_LIST, fillElement);
-    window.colorizeElement(fireballColor, FIREBALL_COLOR_LIST, changeElementBackground);
+    window.colorizeElement(mainWizardCoat, COAT_COLOR_LIST, fillWizardCoat);
+    window.colorizeElement(mainWizardEyes, EYES_COLOR_LIST, fillWizardEyes);
+    window.colorizeElement(fireball, FIREBALL_COLOR_LIST, changeFireballBackground);
   };
 })();
 
